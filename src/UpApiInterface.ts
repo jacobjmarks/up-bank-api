@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { UP_API_BASEURL } from "./config";
-import { GetAccount, GetAccounts } from "./models";
-import { UpAccount } from "./UpAccount";
+import { GetAccount, GetAccounts, Ping } from "./models";
 
 export class UpApiInterface {
   /** Person Access Token associated with this interface instance. */
@@ -21,6 +20,11 @@ export class UpApiInterface {
         Authorization: `Bearer ${pat}`,
       },
     });
+  }
+
+  public async ping(): Promise<boolean> {
+    const res = await this.agent.get<Ping.OkResponse>("/v1/util/ping");
+    return res.status === 200;
   }
 
   public async getAccounts(config?: GetAccounts.RequestConfig): Promise<GetAccounts.OkResponse> {
