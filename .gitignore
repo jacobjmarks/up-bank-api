@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.vscode/
+
+*.log
+
+src/models/up-banking-api.ts

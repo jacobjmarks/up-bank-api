@@ -1,0 +1,17 @@
+{
+  "name": "up-bank-api",
+  "version": "0.0.1",
+  "author": "Jacob Marks <jacobjmarks@outlook.com>",
+  "homepage": "https://github.com/jacobjmarks/up-bank-api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacobjmarks/up-bank-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jacobjmarks/up-bank-api/issues"
+  },
+  "scripts": {
+    "update-models": "npx openapi-typescript https://raw.githubusercontent.com/up-banking/api/master/v1/openapi.json --output src/models/up-banking-api.ts"
+  },
+  "dependencies": {}
+}
