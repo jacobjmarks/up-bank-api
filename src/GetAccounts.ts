@@ -3,8 +3,8 @@ import { UpApiInterface } from "./index";
 import { Account } from "./Account";
 
 type Root = paths["/accounts"]["get"];
-type QueryParams = Root["parameters"]["query"];
-type OkResponse = Root["responses"]["200"]["content"]["application/json"];
+export type QueryParams = Root["parameters"]["query"];
+export type OkResponse = Root["responses"]["200"]["content"]["application/json"];
 
 interface RequestConfig {
   pageSize?: number;
@@ -19,5 +19,5 @@ export async function getAccounts(this: UpApiInterface, config?: RequestConfig):
     params: queryParams,
   });
 
-  return res.data.data.map(Account.apply);
+  return res.data.data.map(acc => new Account(acc));
 }
