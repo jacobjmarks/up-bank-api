@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "author": "Jacob Marks <jacobjmarks@outlook.com>",
   "homepage": "https://github.com/jacobjmarks/up-bank-api",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jacobjmarks/up-bank-api.git"
