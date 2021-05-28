@@ -4,5 +4,3 @@ coverage/
 .vscode/
 
 *.log
-
-src/models/up-banking-api.ts
