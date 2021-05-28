@@ -1,0 +1,23 @@
+import { paths } from "./models/up-banking-api";
+import { UpApiInterface } from "./index";
+import { Account } from "./Account";
+
+type Root = paths["/accounts"]["get"];
+type QueryParams = Root["parameters"]["query"];
+type OkResponse = Root["responses"]["200"]["content"]["application/json"];
+
+interface RequestConfig {
+  pageSize?: number;
+}
+
+export async function getAccounts(this: UpApiInterface, config?: RequestConfig): Promise<Account[]> {
+  let queryParams: QueryParams = {
+    "page[size]": config?.pageSize,
+  };
+
+  const res = await this.agent.get<OkResponse>("/v1/accounts", {
+    params: queryParams,
+  });
+
+  return res.data.data.map(Account.apply);
+}
