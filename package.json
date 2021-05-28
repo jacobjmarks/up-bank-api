@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "update-models": "npx openapi-typescript https://raw.githubusercontent.com/up-banking/api/master/v1/openapi.json --output src/models/up-banking-api.ts"
   },
   "dependencies": {
