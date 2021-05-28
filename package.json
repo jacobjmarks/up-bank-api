@@ -12,12 +12,17 @@
     "url": "https://github.com/jacobjmarks/up-bank-api/issues"
   },
   "scripts": {
+    "test": "jest",
     "update-models": "npx openapi-typescript https://raw.githubusercontent.com/up-banking/api/master/v1/openapi.json --output src/models/up-banking-api.ts"
   },
   "dependencies": {
     "axios": "^0.21.1"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.1",
+    "jest": "^27.0.1",
+    "ts-jest": "^27.0.1",
     "typescript": "^4.3.2"
   }
 }

@@ -3,6 +3,10 @@
     "target": "ES6",
     "module": "commonjs",
     "rootDir": "src",
-    "outDir": "dist"
-  }
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*"]
 }
