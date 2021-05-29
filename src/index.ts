@@ -5,8 +5,7 @@ import { getTransactions } from "./modules/transactions";
 import { ping } from "./modules/utility";
 
 export class UpApiInterface {
-  /** Person Access Token associated with this interface instance. */
-  private token: string;
+  public remainingRateLimit: number | null = null;
 
   protected agent: AxiosInstance;
 
@@ -15,13 +14,19 @@ export class UpApiInterface {
    * @param token Your {@link https://api.up.com.au/getting_started Personal Access Token}
    */
   public constructor(token: string) {
-    this.token = token;
-
     this.agent = axios.create({
       baseURL: UP_API_BASEURL,
       headers: {
         Authorization: `Bearer ${token}`,
       },
+    });
+
+    this.agent.interceptors.response.use(res => {
+      if ("x-ratelimit-remaining" in res.headers) {
+        this.remainingRateLimit = parseInt(res.headers["x-ratelimit-remaining"]);
+      }
+
+      return res;
     });
   }
 
