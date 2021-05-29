@@ -19,5 +19,5 @@ export async function getAccounts(this: UpApiInterface, config?: RequestConfig):
     params: queryParams,
   });
 
-  return new AccountPage({ agent: this.agent }, res.data);
+  return new AccountPage(this.agent, res.data);
 }

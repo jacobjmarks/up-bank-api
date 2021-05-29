@@ -4,23 +4,35 @@ import { Page } from "../Page";
 import { Account } from "./Account";
 import { OkResponse } from "./GetAccounts";
 
+type ListAccountsResponse = components["schemas"]["ListAccountsResponse"];
+
 export class AccountPage extends Page<Account> {
-  constructor(ctx: { agent: AxiosInstance }, { data, links }: components["schemas"]["ListAccountsResponse"]) {
-    super(ctx, {
-      data: data.map(resource => new Account(resource)),
-      links,
-    });
+  private cursors: { prev: string | null; next: string | null };
+  private agent: AxiosInstance;
+
+  constructor(agent: AxiosInstance, { data, links }: ListAccountsResponse) {
+    super(data.map(resource => new Account(resource)));
+    this.agent = agent;
+    this.cursors = links;
+  }
+
+  public hasNextPage(): boolean {
+    return this.cursors.next != null;
+  }
+
+  public hasPreviousPage(): boolean {
+    return this.cursors.prev != null;
   }
 
   public async getNextPage(): Promise<AccountPage | null> {
-    const res = await this.fetchNextPage<OkResponse>();
-    if (res == null) return Promise.resolve(null);
-    return new AccountPage({ agent: this.agent }, res.data);
+    if (!this.hasNextPage()) return null;
+    const res = await this.agent.get<OkResponse>(this.cursors.next);
+    return new AccountPage(this.agent, res.data);
   }
 
   public async getPreviousPage(): Promise<AccountPage | null> {
-    const res = await this.fetchPreviousPage<OkResponse>();
-    if (res == null) return Promise.resolve(null);
-    return new AccountPage({ agent: this.agent }, res.data);
+    if (!this.hasPreviousPage()) return null;
+    const res = await this.agent.get<OkResponse>(this.cursors.prev);
+    return new AccountPage(this.agent, res.data);
   }
 }

@@ -12,10 +12,6 @@ jest.mock("axios");
 const mockedAxios = mocked(axios, true);
 mockedAxios.create.mockImplementation(() => mockedAxios);
 
-const mockContext = {
-  agent: mockedAxios,
-};
-
 const createAxiosResponse = <T = any>(data: T, res?: AxiosResponse<T>): AxiosResponse<T> => {
   return {
     status: 200,
@@ -91,7 +87,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: null, next: null },
     });
 
-    const mockAccountPage = new AccountPage(mockContext, mockedResponse.data);
+    const mockAccountPage = new AccountPage(null, mockedResponse.data);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts();
@@ -106,7 +102,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: null, next: "next-page-link" },
     });
 
-    const mockedAccountPage = new AccountPage(mockContext, mockedResponse.data);
+    const mockedAccountPage = new AccountPage(null, mockedResponse.data);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -121,7 +117,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: "prev-page-link", next: "next-page-link" },
     });
 
-    const mockAccountPage = new AccountPage(mockContext, mockedResponse.data);
+    const mockAccountPage = new AccountPage(null, mockedResponse.data);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -136,7 +132,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: "prev-page-link", next: null },
     });
 
-    const mockAccountPage = new AccountPage(mockContext, mockedResponse.data);
+    const mockAccountPage = new AccountPage(null, mockedResponse.data);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -160,19 +156,19 @@ describe("Get Accounts [/accounts]", () => {
         data: [mockAccountData[0]],
         links: { prev: null, next: "next-page-link" },
       });
-      mockedFirstPage = new AccountPage(mockContext, mockedFirstPageResponse.data);
+      mockedFirstPage = new AccountPage(null, mockedFirstPageResponse.data);
 
       mockedSecondPageResponse = createAxiosResponse<OkResponse>({
         data: [mockAccountData[1]],
         links: { prev: "prev-page-link", next: "next-page-link" },
       });
-      mockedSecondPage = new AccountPage(mockContext, mockedSecondPageResponse.data);
+      mockedSecondPage = new AccountPage(null, mockedSecondPageResponse.data);
 
       mockedLastPageResponse = createAxiosResponse<OkResponse>({
         data: [mockAccountData[2]],
         links: { prev: "prev-page-link", next: null },
       });
-      mockedLastPage = new AccountPage(mockContext, mockedLastPageResponse.data);
+      mockedLastPage = new AccountPage(null, mockedLastPageResponse.data);
     });
 
     test("first to last page", async () => {
