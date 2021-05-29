@@ -1,6 +1,6 @@
-import { UpApiInterface } from ".";
+import { UpApiInterface } from "../..";
+import { paths } from "../../models/up-banking-api";
 import { Account } from "./Account";
-import { paths } from "./models/up-banking-api";
 
 type Root = paths["/accounts/{id}"]["get"];
 export type OkResponse = Root["responses"]["200"]["content"]["application/json"];

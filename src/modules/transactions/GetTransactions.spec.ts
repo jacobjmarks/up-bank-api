@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
-import { UpApiInterface } from ".";
+import { UpApiInterface } from "../..";
 import { OkResponse } from "./GetTransactions";
 import { Transaction } from "./Transaction";
 

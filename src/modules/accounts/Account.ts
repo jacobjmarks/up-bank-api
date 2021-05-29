@@ -1,5 +1,4 @@
-import { UpApiInterface } from ".";
-import { components } from "./models/up-banking-api";
+import { components } from "../../models/up-banking-api";
 
 type AccountResource = components["schemas"]["AccountResource"];
 
