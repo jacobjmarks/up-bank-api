@@ -132,7 +132,7 @@ describe("Get Accounts [/accounts]", () => {
 
   test("Get last page", async () => {
     const mockedResponse = createAxiosResponse<OkResponse>({
-      data: [mockAccountData[3]],
+      data: [mockAccountData[2]],
       links: { prev: "prev-page-link", next: null },
     });
 
