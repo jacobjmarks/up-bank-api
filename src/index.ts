@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { UP_API_BASEURL } from "./config";
 import { getAccount } from "./GetAccount";
 import { getAccounts } from "./GetAccounts";
+import { getTransactions } from "./GetTransactions";
 import { ping } from "./Ping";
 
 export class UpApiInterface {
@@ -28,4 +29,5 @@ export class UpApiInterface {
   public ping = ping;
   public getAccounts = getAccounts;
   public getAccount = getAccount;
+  public getTransactions = getTransactions;
 }
