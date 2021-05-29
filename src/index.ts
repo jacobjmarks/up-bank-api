@@ -1,9 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { UP_API_BASEURL } from "./config";
-import { getAccount } from "./GetAccount";
-import { getAccounts } from "./GetAccounts";
-import { getTransactions } from "./GetTransactions";
-import { ping } from "./Ping";
+import { getAccount, getAccounts } from "./modules/accounts";
+import { getTransactions } from "./modules/transactions";
+import { ping } from "./modules/utility";
 
 export class UpApiInterface {
   /** Person Access Token associated with this interface instance. */

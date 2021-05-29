@@ -1,4 +1,4 @@
-import { components } from "./models/up-banking-api";
+import { components } from "../../models/up-banking-api";
 
 type TransactionResource = components["schemas"]["TransactionResource"];
 

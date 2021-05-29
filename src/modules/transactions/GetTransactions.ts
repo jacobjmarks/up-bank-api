@@ -1,6 +1,5 @@
-import { Account } from "./Account";
-import { UpApiInterface } from "./index";
-import { paths } from "./models/up-banking-api";
+import { UpApiInterface } from "../../index";
+import { paths } from "../../models/up-banking-api";
 import { Transaction } from "./Transaction";
 
 type Root = paths["/transactions"]["get"];

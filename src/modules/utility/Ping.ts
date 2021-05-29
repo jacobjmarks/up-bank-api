@@ -1,5 +1,5 @@
-import { UpApiInterface } from ".";
-import { paths } from "./models/up-banking-api";
+import { UpApiInterface } from "../..";
+import { paths } from "../../models/up-banking-api";
 
 type Root = paths["/util/ping"]["get"];
 export type OkResponse = Root["responses"]["200"]["content"]["application/json"];
