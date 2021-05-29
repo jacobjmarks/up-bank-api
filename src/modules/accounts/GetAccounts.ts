@@ -1,6 +1,6 @@
 import { UpApiInterface } from "../..";
 import { paths } from "../../models/up-banking-api";
-import { Account } from "./Account";
+import { AccountPage } from "./AccountPage";
 
 type Root = paths["/accounts"]["get"];
 export type QueryParams = Root["parameters"]["query"];
@@ -10,7 +10,7 @@ interface RequestConfig {
   pageSize?: number;
 }
 
-export async function getAccounts(this: UpApiInterface, config?: RequestConfig): Promise<Account[]> {
+export async function getAccounts(this: UpApiInterface, config?: RequestConfig): Promise<AccountPage> {
   let queryParams: QueryParams = {
     "page[size]": config?.pageSize,
   };
@@ -19,5 +19,5 @@ export async function getAccounts(this: UpApiInterface, config?: RequestConfig):
     params: queryParams,
   });
 
-  return res.data.data.map(acc => new Account(acc));
+  return new AccountPage(this.agent, res.data);
 }
