@@ -5,8 +5,11 @@
     "rootDir": "src",
     "outDir": "dist",
     "experimentalDecorators": true,
+    "allowJs": true,
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
-    "allowJs": true
+    "inlineSources": true
   },
   "include": ["src/**/*"]
 }
