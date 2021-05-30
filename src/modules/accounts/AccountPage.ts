@@ -1,10 +1,8 @@
 import { AxiosInstance } from "axios";
-import { components } from "../../models/up-banking-api";
+import { ListAccountsResponse } from "../../models";
 import { Page } from "../Page";
 import { Account } from "./Account";
 import { OkResponse } from "./GetAccounts";
-
-type ListAccountsResponse = components["schemas"]["ListAccountsResponse"];
 
 export class AccountPage extends Page<Account> {
   private cursors: { prev: string | null; next: string | null };

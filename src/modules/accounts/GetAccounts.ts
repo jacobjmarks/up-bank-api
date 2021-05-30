@@ -1,5 +1,5 @@
 import { UpApiInterface } from "../../UpApiInterface";
-import { paths } from "../../models/up-banking-api";
+import { paths } from "../../models/generated";
 import { AccountPage } from "./AccountPage";
 
 type Root = paths["/accounts"]["get"];

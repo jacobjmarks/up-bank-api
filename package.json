@@ -18,7 +18,7 @@
     "build": "yarn clean && tsc",
     "test": "jest",
     "coverage": "jest --coverage",
-    "update-models": "npx openapi-typescript https://raw.githubusercontent.com/up-banking/api/master/v1/openapi.json --output src/models/up-banking-api.ts"
+    "update-models": "npx openapi-typescript https://raw.githubusercontent.com/up-banking/api/master/v1/openapi.json --output src/models/generated.ts"
   },
   "dependencies": {
     "axios": "^0.21.1"
