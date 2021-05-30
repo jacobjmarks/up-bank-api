@@ -1,6 +1,6 @@
 import axios from "axios";
 import { mocked } from "ts-jest/utils";
-import { UpApiInterface } from "../..";
+import { UpApiInterface } from "../../UpApiInterface";
 
 jest.mock("axios");
 

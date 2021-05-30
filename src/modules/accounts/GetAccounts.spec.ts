@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
-import { UpApiInterface } from "../..";
+import { UpApiInterface } from "../../UpApiInterface";
 import { components } from "../../models/up-banking-api";
 import { Account } from "./Account";
 import { AccountPage } from "./AccountPage";

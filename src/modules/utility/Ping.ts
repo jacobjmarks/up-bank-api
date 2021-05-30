@@ -1,4 +1,4 @@
-import { UpApiInterface } from "../..";
+import { UpApiInterface } from "../../UpApiInterface";
 import { paths } from "../../models/up-banking-api";
 
 type Root = paths["/util/ping"]["get"];
