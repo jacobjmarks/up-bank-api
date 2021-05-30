@@ -5,8 +5,6 @@ import { getTransactions } from "./modules/transactions";
 import { ping } from "./modules/utility";
 
 export class UpApiInterface {
-  public remainingRateLimit: number | null = null;
-
   protected agent: AxiosInstance;
 
   /**
@@ -19,14 +17,6 @@ export class UpApiInterface {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-
-    this.agent.interceptors.response.use(res => {
-      if ("x-ratelimit-remaining" in res.headers) {
-        this.remainingRateLimit = parseInt(res.headers["x-ratelimit-remaining"]);
-      }
-
-      return res;
     });
   }
 
