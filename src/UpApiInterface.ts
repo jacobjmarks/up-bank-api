@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { UP_API_BASEURL } from "./config";
+import { MoneyObject } from "./models";
 import { Account, getAccount, getAccounts } from "./modules/accounts";
 import { getTransactions, Transaction } from "./modules/transactions";
 import { ping } from "./modules/utility";
@@ -32,6 +33,30 @@ export class UpApiInterface {
    */
   public async getAllAccounts(): Promise<Account[]> {
     return await (await this.getAccounts()).getRemainingData();
+  }
+
+  /**
+   * Calculate the total balance accross all accounts.
+   * @warning This is a custom exhaustive fetch that may result in multiple API calls
+   * @returns Total account balance.
+   */
+  public async getTotalBalance(): Promise<MoneyObject | null> {
+    const accounts = await this.getAllAccounts();
+    if (accounts.length === 0) return null;
+
+    let grandTotal: MoneyObject = undefined;
+    for (const account of accounts) {
+      if (grandTotal === undefined) {
+        grandTotal = account.balance;
+        continue;
+      }
+
+      grandTotal.valueInBaseUnits += account.balance.valueInBaseUnits;
+    }
+
+    grandTotal.value = (grandTotal.valueInBaseUnits / 100.0).toString();
+
+    return grandTotal;
   }
 
   /**
