@@ -8,21 +8,23 @@ export type OkResponse = Root["responses"]["200"]["content"]["application/json"]
 
 interface RequestConfig {
   pageSize?: number;
+  category?: string;
+  tag?: string;
+  status?: "HELD" | "SETTLED";
+  since?: Date;
+  until?: Date;
 }
 
 export async function getTransactions(this: UpApiInterface, config?: RequestConfig): Promise<Transaction[]> {
-  let queryParams: QueryParams = {
+  let params: QueryParams = {
     "page[size]": config?.pageSize,
-    "filter[category]": undefined,
-    "filter[since]": undefined,
-    "filter[until]": undefined,
-    "filter[status]": undefined,
-    "filter[tag]": undefined,
+    "filter[category]": config?.category,
+    "filter[tag]": config?.tag,
+    "filter[status]": config?.status,
+    "filter[since]": config?.since.toISOString(),
+    "filter[until]": config?.until.toISOString(),
   };
 
-  const res = await this.agent.get<OkResponse>("/v1/transactions", {
-    params: queryParams,
-  });
-
+  const res = await this.agent.get<OkResponse>("/v1/transactions", { params });
   return res.data.data.map(txn => new Transaction(txn));
 }
