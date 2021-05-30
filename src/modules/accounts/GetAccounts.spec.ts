@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
+import { AccountResource } from "../../models";
 import { UpApiInterface } from "../../UpApiInterface";
-import { components } from "../../models/up-banking-api";
 import { Account } from "./Account";
 import { AccountPage } from "./AccountPage";
 import { OkResponse } from "./GetAccounts";
@@ -27,7 +27,7 @@ describe("Get Accounts [/accounts]", () => {
   let up: UpApiInterface | null = null;
 
   let mockAccounts: Account[];
-  let mockAccountData: components["schemas"]["AccountResource"][];
+  let mockAccountData: AccountResource[];
 
   beforeEach(() => {
     up = new UpApiInterface("stub");

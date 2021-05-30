@@ -1,20 +1,25 @@
-import { components } from "../../models/up-banking-api";
-
-type TransactionResource = components["schemas"]["TransactionResource"];
+import {
+  CashbackObject,
+  HoldInfoObject,
+  MoneyObject,
+  RoundUpObject,
+  TransactionResource,
+  TransactionStatusEnum,
+} from "../../models";
 
 export class Transaction {
   public id: string;
-  public amount: components["schemas"]["MoneyObject"];
+  public amount: MoneyObject;
   public description: string;
-  public status: components["schemas"]["TransactionStatusEnum"];
+  public status: TransactionStatusEnum;
   public createdAt: Date;
   public settledAt?: Date;
   public rawText?: string;
   public message?: string;
-  public holdInfo?: components["schemas"]["HoldInfoObject"];
-  public roundUp?: components["schemas"]["RoundUpObject"];
-  public cashback?: components["schemas"]["CashbackObject"];
-  public foreignAmount?: components["schemas"]["MoneyObject"];
+  public holdInfo?: HoldInfoObject;
+  public roundUp?: RoundUpObject;
+  public cashback?: CashbackObject;
+  public foreignAmount?: MoneyObject;
 
   constructor({
     id,

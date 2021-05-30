@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { components } from "../../models/up-banking-api";
+import { components } from "../../models/generated";
 import { Page } from "../Page";
 import { OkResponse } from "./GetTransactions";
 import { Transaction } from "./Transaction";

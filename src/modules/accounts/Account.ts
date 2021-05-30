@@ -1,13 +1,11 @@
-import { components } from "../../models/up-banking-api";
-
-type AccountResource = components["schemas"]["AccountResource"];
+import { AccountResource, AccountTypeEnum, MoneyObject } from "../../models";
 
 export class Account {
   public id: string;
   public displayName: string;
-  public type: components["schemas"]["AccountTypeEnum"];
+  public type: AccountTypeEnum;
   public createdAt: Date;
-  public balance: components["schemas"]["MoneyObject"];
+  public balance: MoneyObject;
 
   constructor(data: AccountResource) {
     this.id = data.id;

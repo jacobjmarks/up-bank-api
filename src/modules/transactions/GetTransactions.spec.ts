@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
+import { TransactionResource } from "../../models";
 import { UpApiInterface } from "../../UpApiInterface";
-import { components } from "../../models/up-banking-api";
+import { OkResponse } from "./GetTransactions";
 import { Transaction } from "./Transaction";
 import { TransactionPage } from "./TransactionPage";
-import { OkResponse } from "./GetTransactions";
 
 jest.mock("axios");
 
@@ -27,7 +27,7 @@ describe("Get Transactions [/transactions]", () => {
   let up: UpApiInterface | null = null;
 
   let mockTransactions: Transaction[];
-  let mockTransactionData: components["schemas"]["TransactionResource"][];
+  let mockTransactionData: TransactionResource[];
 
   beforeEach(() => {
     up = new UpApiInterface("stub");
