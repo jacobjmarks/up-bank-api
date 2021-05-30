@@ -10,11 +10,17 @@ A Typescript interface to the [Up Banking API](https://github.com/up-banking/api
 ## Current primitive resource support
 
 - [x] [Accounts](https://developer.up.com.au/#accounts)
-- [ ] [Categories](https://developer.up.com.au/#categories)
-- [ ] [Tags](https://developer.up.com.au/#tags)
+  - [x] Get all accounts
+  - [x] Get account by id
+- [ ] [Categories](https://developer.up.com.au/#categories) - Coming soon
+- [ ] [Tags](https://developer.up.com.au/#tags) - Coming soon
 - [ ] [Transactions](https://developer.up.com.au/#transactions)
+  - [x] Get all transactions
+  - [ ] Get transaction by id
+  - [ ] Get transactions by account
 - [x] [Utility](https://developer.up.com.au/#utility_endpoints)
-- [ ] [Webhooks](https://developer.up.com.au/#webhooks)
+  - [x] Ping
+- [ ] [Webhooks](https://developer.up.com.au/#webhooks) - Coming soon
 
 ## License
 
