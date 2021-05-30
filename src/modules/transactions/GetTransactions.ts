@@ -1,4 +1,4 @@
-import { UpApiInterface } from "../../index";
+import { UpApiInterface } from "../../UpApiInterface";
 import { paths } from "../../models/up-banking-api";
 import { TransactionPage } from "./TransactionPage";
 
