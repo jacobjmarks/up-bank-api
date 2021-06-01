@@ -5,20 +5,26 @@ import { Account, getAccount, getAccounts } from "./modules/accounts";
 import { getTransactions, Transaction } from "./modules/transactions";
 import { ping } from "./modules/utility";
 
+export interface InterfaceContext {
+  agent: AxiosInstance;
+}
+
 export class UpApiInterface {
-  protected agent: AxiosInstance;
+  protected ctx: InterfaceContext;
 
   /**
    * Create a new Up Banking API interface.
    * @param token Your {@link https://api.up.com.au/getting_started Personal Access Token}
    */
   public constructor(token: string) {
-    this.agent = axios.create({
-      baseURL: UP_API_BASEURL,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    this.ctx = {
+      agent: axios.create({
+        baseURL: UP_API_BASEURL,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    };
   }
 
   public ping = ping;

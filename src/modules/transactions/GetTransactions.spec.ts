@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
 import { TransactionResource } from "../../models";
-import { UpApiInterface } from "../../UpApiInterface";
+import { InterfaceContext, UpApiInterface } from "../../UpApiInterface";
 import { OkResponse } from "./GetTransactions";
 import { Transaction } from "./Transaction";
 import { TransactionPage } from "./TransactionPage";
@@ -11,6 +11,8 @@ jest.mock("axios");
 
 const mockedAxios = mocked(axios, true);
 mockedAxios.create.mockImplementation(() => mockedAxios);
+
+const mockCtx: InterfaceContext = { agent: mockedAxios };
 
 const createAxiosResponse = <T = any>(data: T, res?: AxiosResponse<T>): AxiosResponse<T> => {
   return {
@@ -33,7 +35,7 @@ describe("Get Transactions [/transactions]", () => {
     up = new UpApiInterface("stub");
 
     mockTransactions = [
-      {
+      <Transaction>{
         id: randomUUID(),
         description: "My First Test Transaction",
         amount: {
@@ -44,7 +46,7 @@ describe("Get Transactions [/transactions]", () => {
         createdAt: new Date(),
         status: "SETTLED",
       },
-      {
+      <Transaction>{
         id: randomUUID(),
         description: "My Second Test Transaction",
         amount: {
@@ -55,7 +57,7 @@ describe("Get Transactions [/transactions]", () => {
         createdAt: new Date(),
         status: "SETTLED",
       },
-      {
+      <Transaction>{
         id: randomUUID(),
         description: "My Third Test Transaction",
         amount: {
@@ -107,7 +109,7 @@ describe("Get Transactions [/transactions]", () => {
       links: { prev: null, next: null },
     });
 
-    const mockTransactionPage = new TransactionPage(null, mockedResponse.data);
+    const mockTransactionPage = new TransactionPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const transactionPage = await up?.getTransactions();
@@ -122,7 +124,7 @@ describe("Get Transactions [/transactions]", () => {
       links: { prev: null, next: "next-page-link" },
     });
 
-    const mockedTransactionPage = new TransactionPage(null, mockedResponse.data);
+    const mockedTransactionPage = new TransactionPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const transactionPage = await up?.getTransactions({ pageSize: 1 });
@@ -137,7 +139,7 @@ describe("Get Transactions [/transactions]", () => {
       links: { prev: "prev-page-link", next: "next-page-link" },
     });
 
-    const mockTransactionPage = new TransactionPage(null, mockedResponse.data);
+    const mockTransactionPage = new TransactionPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const transactionPage = await up?.getTransactions({ pageSize: 1 });
@@ -152,7 +154,7 @@ describe("Get Transactions [/transactions]", () => {
       links: { prev: "prev-page-link", next: null },
     });
 
-    const mockTransactionPage = new TransactionPage(null, mockedResponse.data);
+    const mockTransactionPage = new TransactionPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const transactionPage = await up?.getTransactions({ pageSize: 1 });
@@ -176,19 +178,19 @@ describe("Get Transactions [/transactions]", () => {
         data: [mockTransactionData[0]],
         links: { prev: null, next: "next-page-link" },
       });
-      mockedFirstPage = new TransactionPage(null, mockedFirstPageResponse.data);
+      mockedFirstPage = new TransactionPage(mockedFirstPageResponse.data, mockCtx);
 
       mockedSecondPageResponse = createAxiosResponse<OkResponse>({
         data: [mockTransactionData[1]],
         links: { prev: "prev-page-link", next: "next-page-link" },
       });
-      mockedSecondPage = new TransactionPage(null, mockedSecondPageResponse.data);
+      mockedSecondPage = new TransactionPage(mockedSecondPageResponse.data, mockCtx);
 
       mockedLastPageResponse = createAxiosResponse<OkResponse>({
         data: [mockTransactionData[2]],
         links: { prev: "prev-page-link", next: null },
       });
-      mockedLastPage = new TransactionPage(null, mockedLastPageResponse.data);
+      mockedLastPage = new TransactionPage(mockedLastPageResponse.data, mockCtx);
     });
 
     test("first to last page", async () => {

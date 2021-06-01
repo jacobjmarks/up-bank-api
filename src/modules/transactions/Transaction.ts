@@ -6,6 +6,7 @@ import {
   TransactionResource,
   TransactionStatusEnum,
 } from "../../models";
+import { InterfaceContext } from "../../UpApiInterface";
 
 export class Transaction {
   public id: string;
@@ -21,22 +22,27 @@ export class Transaction {
   public cashback?: CashbackObject;
   public foreignAmount?: MoneyObject;
 
-  constructor({
-    id,
-    attributes: {
-      createdAt,
-      amount,
-      status,
-      description,
-      rawText,
-      message,
-      holdInfo,
-      roundUp,
-      cashback,
-      settledAt,
-      foreignAmount,
-    },
-  }: TransactionResource) {
+  private ctx: InterfaceContext;
+
+  constructor(
+    {
+      id,
+      attributes: {
+        createdAt,
+        amount,
+        status,
+        description,
+        rawText,
+        message,
+        holdInfo,
+        roundUp,
+        cashback,
+        settledAt,
+        foreignAmount,
+      },
+    }: TransactionResource,
+    ctx?: InterfaceContext
+  ) {
     this.id = id;
     this.amount = amount;
     this.description = description;
@@ -49,5 +55,7 @@ export class Transaction {
     if (roundUp) this.roundUp = roundUp;
     if (cashback) this.cashback = cashback;
     if (foreignAmount) this.foreignAmount = foreignAmount;
+
+    this.ctx = ctx;
   }
 }
