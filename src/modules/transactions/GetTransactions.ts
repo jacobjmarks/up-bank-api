@@ -1,5 +1,5 @@
-import { UpApiInterface } from "../../UpApiInterface";
 import { paths } from "../../models/generated";
+import { UpApiInterface } from "../../UpApiInterface";
 import { TransactionPage } from "./TransactionPage";
 
 type Root = paths["/transactions"]["get"];
@@ -25,6 +25,6 @@ export async function getTransactions(this: UpApiInterface, config?: RequestConf
     "filter[until]": config?.until?.toISOString(),
   };
 
-  const res = await this.agent.get<OkResponse>("/v1/transactions", { params });
-  return new TransactionPage(this.agent, res.data);
+  const res = await this.ctx.agent.get<OkResponse>("/v1/transactions", { params });
+  return new TransactionPage(res.data, this.ctx);
 }

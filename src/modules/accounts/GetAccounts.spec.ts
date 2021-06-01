@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { randomUUID } from "crypto";
 import { mocked } from "ts-jest/utils";
 import { AccountResource } from "../../models";
-import { UpApiInterface } from "../../UpApiInterface";
+import { InterfaceContext, UpApiInterface } from "../../UpApiInterface";
 import { Account } from "./Account";
 import { AccountPage } from "./AccountPage";
 import { OkResponse } from "./GetAccounts";
@@ -11,6 +11,8 @@ jest.mock("axios");
 
 const mockedAxios = mocked(axios, true);
 mockedAxios.create.mockImplementation(() => mockedAxios);
+
+const mockCtx: InterfaceContext = { agent: mockedAxios };
 
 const createAxiosResponse = <T = any>(data: T, res?: AxiosResponse<T>): AxiosResponse<T> => {
   return {
@@ -33,7 +35,7 @@ describe("Get Accounts [/accounts]", () => {
     up = new UpApiInterface("stub");
 
     mockAccounts = [
-      {
+      <Account>{
         id: randomUUID(),
         displayName: "My First Test Account",
         createdAt: new Date(),
@@ -44,7 +46,7 @@ describe("Get Accounts [/accounts]", () => {
         },
         type: "TRANSACTIONAL",
       },
-      {
+      <Account>{
         id: randomUUID(),
         displayName: "My Second Test Account",
         createdAt: new Date(),
@@ -55,7 +57,7 @@ describe("Get Accounts [/accounts]", () => {
         },
         type: "SAVER",
       },
-      {
+      <Account>{
         id: randomUUID(),
         displayName: "My Third Test Account",
         createdAt: new Date(),
@@ -87,7 +89,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: null, next: null },
     });
 
-    const mockAccountPage = new AccountPage(null, mockedResponse.data);
+    const mockAccountPage = new AccountPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts();
@@ -102,7 +104,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: null, next: "next-page-link" },
     });
 
-    const mockedAccountPage = new AccountPage(null, mockedResponse.data);
+    const mockedAccountPage = new AccountPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -117,7 +119,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: "prev-page-link", next: "next-page-link" },
     });
 
-    const mockAccountPage = new AccountPage(null, mockedResponse.data);
+    const mockAccountPage = new AccountPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -132,7 +134,7 @@ describe("Get Accounts [/accounts]", () => {
       links: { prev: "prev-page-link", next: null },
     });
 
-    const mockAccountPage = new AccountPage(null, mockedResponse.data);
+    const mockAccountPage = new AccountPage(mockedResponse.data, mockCtx);
 
     mockedAxios.get.mockResolvedValueOnce(mockedResponse);
     const accountPage = await up?.getAccounts({ pageSize: 1 });
@@ -156,19 +158,19 @@ describe("Get Accounts [/accounts]", () => {
         data: [mockAccountData[0]],
         links: { prev: null, next: "next-page-link" },
       });
-      mockedFirstPage = new AccountPage(null, mockedFirstPageResponse.data);
+      mockedFirstPage = new AccountPage(mockedFirstPageResponse.data, mockCtx);
 
       mockedSecondPageResponse = createAxiosResponse<OkResponse>({
         data: [mockAccountData[1]],
         links: { prev: "prev-page-link", next: "next-page-link" },
       });
-      mockedSecondPage = new AccountPage(null, mockedSecondPageResponse.data);
+      mockedSecondPage = new AccountPage(mockedSecondPageResponse.data, mockCtx);
 
       mockedLastPageResponse = createAxiosResponse<OkResponse>({
         data: [mockAccountData[2]],
         links: { prev: "prev-page-link", next: null },
       });
-      mockedLastPage = new AccountPage(null, mockedLastPageResponse.data);
+      mockedLastPage = new AccountPage(mockedLastPageResponse.data, mockCtx);
     });
 
     test("first to last page", async () => {

@@ -1,5 +1,5 @@
-import { UpApiInterface } from "../../UpApiInterface";
 import { paths } from "../../models/generated";
+import { UpApiInterface } from "../../UpApiInterface";
 import { AccountPage } from "./AccountPage";
 
 type Root = paths["/accounts"]["get"];
@@ -15,9 +15,9 @@ export async function getAccounts(this: UpApiInterface, config?: RequestConfig):
     "page[size]": config?.pageSize,
   };
 
-  const res = await this.agent.get<OkResponse>("/v1/accounts", {
+  const res = await this.ctx.agent.get<OkResponse>("/v1/accounts", {
     params: queryParams,
   });
 
-  return new AccountPage(this.agent, res.data);
+  return new AccountPage(res.data, this.ctx);
 }

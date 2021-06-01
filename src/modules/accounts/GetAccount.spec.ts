@@ -18,7 +18,7 @@ describe("Get Account [/accounts/{id}]", () => {
   });
 
   test("Get account with id", async () => {
-    const mockAccount: Account = {
+    const mockAccount: Account = <Account>{
       id: randomUUID(),
       displayName: "My Test Account",
       createdAt: new Date(),
