@@ -9,21 +9,21 @@ const mockedAxios = mocked(axios, true);
 mockedAxios.create.mockImplementation(() => mockedAxios);
 
 const TEST_ACCOUNTS: Account[] = [
-  <Account>{
+  {
     id: "1",
     balance: { currencyCode: "AUD", value: "123.45", valueInBaseUnits: 12345 },
     displayName: "Test account 1",
     createdAt: new Date(),
     type: "SAVER",
   },
-  <Account>{
+  {
     id: "2",
     balance: { currencyCode: "AUD", value: "428.12", valueInBaseUnits: 42812 },
     displayName: "Test account 2",
     createdAt: new Date(),
     type: "SAVER",
   },
-  <Account>{
+  {
     id: "3",
     balance: { currencyCode: "AUD", value: "599.11", valueInBaseUnits: 59911 },
     displayName: "Test account 3",

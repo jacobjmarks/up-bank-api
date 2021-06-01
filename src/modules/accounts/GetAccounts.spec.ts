@@ -35,7 +35,7 @@ describe("Get Accounts [/accounts]", () => {
     up = new UpApiInterface("stub");
 
     mockAccounts = [
-      <Account>{
+      {
         id: randomUUID(),
         displayName: "My First Test Account",
         createdAt: new Date(),
@@ -46,7 +46,7 @@ describe("Get Accounts [/accounts]", () => {
         },
         type: "TRANSACTIONAL",
       },
-      <Account>{
+      {
         id: randomUUID(),
         displayName: "My Second Test Account",
         createdAt: new Date(),
@@ -57,7 +57,7 @@ describe("Get Accounts [/accounts]", () => {
         },
         type: "SAVER",
       },
-      <Account>{
+      {
         id: randomUUID(),
         displayName: "My Third Test Account",
         createdAt: new Date(),

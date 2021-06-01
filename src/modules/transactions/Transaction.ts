@@ -22,7 +22,7 @@ export class Transaction {
   public cashback?: CashbackObject;
   public foreignAmount?: MoneyObject;
 
-  private ctx: InterfaceContext;
+  private ctx?: InterfaceContext;
 
   constructor(
     {

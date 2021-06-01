@@ -35,7 +35,7 @@ describe("Get Transactions [/transactions]", () => {
     up = new UpApiInterface("stub");
 
     mockTransactions = [
-      <Transaction>{
+      {
         id: randomUUID(),
         description: "My First Test Transaction",
         amount: {
@@ -46,7 +46,7 @@ describe("Get Transactions [/transactions]", () => {
         createdAt: new Date(),
         status: "SETTLED",
       },
-      <Transaction>{
+      {
         id: randomUUID(),
         description: "My Second Test Transaction",
         amount: {
@@ -57,7 +57,7 @@ describe("Get Transactions [/transactions]", () => {
         createdAt: new Date(),
         status: "SETTLED",
       },
-      <Transaction>{
+      {
         id: randomUUID(),
         description: "My Third Test Transaction",
         amount: {

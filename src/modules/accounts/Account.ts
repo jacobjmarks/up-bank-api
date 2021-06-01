@@ -8,7 +8,7 @@ export class Account {
   public createdAt: Date;
   public balance: MoneyObject;
 
-  private ctx: InterfaceContext;
+  private ctx?: InterfaceContext;
 
   constructor(data: AccountResource, ctx?: InterfaceContext) {
     this.id = data.id;

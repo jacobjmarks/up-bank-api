@@ -7,7 +7,7 @@ import { OkResponse } from "./GetAccounts";
 export class AccountPage extends Page<Account> {
   private cursors: { prev: string | null; next: string | null };
 
-  private ctx: InterfaceContext;
+  private ctx?: InterfaceContext;
 
   constructor({ data, links }: ListAccountsResponse, ctx?: InterfaceContext) {
     super(data.map(resource => new Account(resource, ctx)));

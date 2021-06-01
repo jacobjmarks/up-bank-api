@@ -9,7 +9,7 @@ type ListTransactionsResponse = components["schemas"]["ListTransactionsResponse"
 export class TransactionPage extends Page<Transaction> {
   private cursors: { prev: string | null; next: string | null };
 
-  private ctx: InterfaceContext;
+  private ctx?: InterfaceContext;
 
   constructor({ data, links }: ListTransactionsResponse, ctx?: InterfaceContext) {
     super(data.map(resource => new Transaction(resource, ctx)));
