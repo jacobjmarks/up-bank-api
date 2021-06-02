@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { UP_API_BASEURL } from "./config";
 import { MoneyObject } from "./models";
 import { Account, getAccount, getAccounts } from "./modules/accounts";
-import { getTransactions, Transaction } from "./modules/transactions";
+import { getTransaction, getTransactions, Transaction } from "./modules/transactions";
 import { ping } from "./modules/utility";
 
 export interface InterfaceContext {
@@ -30,6 +30,7 @@ export class UpApiInterface {
   public ping = ping;
   public getAccounts = getAccounts;
   public getAccount = getAccount;
+  public getTransaction = getTransaction;
   public getTransactions = getTransactions;
 
   /**
