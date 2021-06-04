@@ -24,7 +24,3 @@ A Typescript interface to the [Up Banking API](https://github.com/up-banking/api
 
 ## Support my work
 ☕ [Buy me a coffee?](https://www.buymeacoffee.com/jacobjmarks)
-
-## License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjacobjmarks%2Fup-bank-api.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjacobjmarks%2Fup-bank-api?ref=badge_large)
