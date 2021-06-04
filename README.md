@@ -16,7 +16,7 @@ A Typescript interface to the [Up Banking API](https://github.com/up-banking/api
 - [ ] [Tags](https://developer.up.com.au/#tags) - Coming soon
 - [ ] [Transactions](https://developer.up.com.au/#transactions)
   - [x] Get all transactions
-  - [ ] Get transaction by id
+  - [x] Get transaction by id
   - [ ] Get transactions by account
 - [x] [Utility](https://developer.up.com.au/#utility_endpoints)
   - [x] Ping
